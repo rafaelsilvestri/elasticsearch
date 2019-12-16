@@ -4,8 +4,8 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
     container_name: elasticsearch
     environment:
-      #- discovery.type=single-node
-      - cluster.initial_master_nodes=elasticsearch
+      - discovery.type=single-node
+      #- cluster.initial_master_nodes=es
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -16,41 +16,41 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - esdata1:/usr/share/elasticsearch/data
+      - esdata1:/usr/share/es/data
     ports:
       - 9200:9200
     networks:
       - esnet
 
-  elasticsearch2:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
-    container_name: elasticsearch2
-    environment:
-      - cluster.initial_master_nodes=elasticsearch
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch"
-      - http.cors.enabled=true
-      - http.cors.allow-origin=*
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - esdata2:/usr/share/elasticsearch/data
-    networks:
-      - esnet
+#  elasticsearch2:
+#    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
+#    container_name: elasticsearch2
+#    environment:
+#      - cluster.initial_master_nodes=es
+#      - cluster.name=docker-cluster
+#      - bootstrap.memory_lock=true
+#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+#      - "discovery.zen.ping.unicast.hosts=es"
+#      - http.cors.enabled=true
+#      - http.cors.allow-origin=*
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+#    volumes:
+#      - esdata2:/usr/share/es/data
+#    networks:
+#      - esnet
 
   # elasticsearch3:
   #   image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
   #   container_name: elasticsearch3
   #   environment:
-  #     - cluster.initial_master_nodes=elasticsearch
+  #     - cluster.initial_master_nodes=es
   #     - cluster.name=docker-cluster
   #     - bootstrap.memory_lock=true
   #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-  #     - "discovery.zen.ping.unicast.hosts=elasticsearch"
+  #     - "discovery.zen.ping.unicast.hosts=es"
   #     - http.cors.enabled=true
   #     - http.cors.allow-origin=*
   #   ulimits:
@@ -58,26 +58,26 @@ services:
   #       soft: -1
   #       hard: -1
   #   volumes:
-  #     - esdata3:/usr/share/elasticsearch/data
+  #     - esdata3:/usr/share/es/data
   #   networks:
   #     - esnet
 
-  kibana:
-    image: 'docker.elastic.co/kibana/kibana:7.5.0'
-    container_name: kibana
-    environment:
-      SERVER_NAME: kibana.local
-      ELASTICSEARCH_URL: http://elasticsearch:9200
-    ports:
-      - '5601:5601'
-    networks:
-      - esnet
-    depends_on: 
-      - elasticsearch
-      - elasticsearch2
+#  kibana:
+#    image: 'docker.elastic.co/kibana/kibana:7.5.0'
+#    container_name: kibana
+#    environment:
+#      SERVER_NAME: kibana.local
+#      ELASTICSEARCH_URL: http://es:9200
+#    ports:
+#      - '5601:5601'
+#    networks:
+#      - esnet
+#    depends_on:
+#      - es
+#      - elasticsearch2
 
   # headPlugin:
-  #  image: 'mobz/elasticsearch-head:5'
+  #  image: 'mobz/es-head:5'
   #  container_name: head
   #  ports:
   #    - '9100:9100'

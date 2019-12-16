@@ -2,6 +2,12 @@
 
 Docker Compose for Elasticsearch Cluster and Kibana instance for development propouses.
 
+### Technologies
+* [Elasticsearch 7.5](https://www.elastic.co/)
+* [Docker](https://www.docker.com/)
+* [Spring Data Elasticsearch](https://spring.io/projects/spring-data-elasticsearch)
+* [Testcontainers](https://www.testcontainers.org/modules/elasticsearch/)
+
 ### Starting the Stack
 ```bash
 docker-compose up
@@ -43,13 +49,13 @@ curl -XGET "http://elasticsearch:9200/user/_doc/1"
 
 If you have a lot of documents to index, you can submit them in batches with the bulk API.
 ```bash
-curl -H "Content-Type: application/json" -XPOST "http://localhost:9200/bank/_bulk?pretty&refresh" --data-binary "@accounts.json"
+curl -H "Content-Type: application/json" -XPOST "http://localhost:9200/bank/accounts/_bulk?pretty&refresh" --data-binary "@accounts.json"
 ```
 
 To retrieve a list of contacts where `gender` is M:
 
 ```bash
-curl -XGET "http://elasticsearch:9200/bank/_search" -H 'Content-Type: application/json' -d '{ "from": 0, "size": 100, "query": {    "match": {"gender": "M"} }}'
+curl -XGET "http://localhost:9200/bank/_search?pretty" -H 'Content-Type: application/json' -d '{ "from": 0, "size": 100, "query": {    "match": {"gender": "M"} }}'
 ```
 
 ### Index info
@@ -59,6 +65,9 @@ To catch more information about your indices, type:
 ```bash
 curl "http://localhost:9200/_cat/indices?v"
 ```
+
+### Application Endpoints
+TBD
 
 ### References  
 
