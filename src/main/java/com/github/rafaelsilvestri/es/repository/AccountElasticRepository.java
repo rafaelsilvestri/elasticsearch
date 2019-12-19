@@ -16,6 +16,11 @@ public interface AccountElasticRepository extends ReactiveElasticsearchRepositor
 
     Flux<Account> findByFirstName(String name);
 
-    @Query("{\"bool\": {\"must\": [{\"match\": {\"firstname\": \"?0\"}}]}}")
+    @Query("{\"bool\": {\"must\": [{\"match\": {\"firstName\": \"?0\"}}]}}")
     Flux<Account> findByFirstNameUsingCustomQuery(String name);
+
+    Flux<Account> findByAge(int age);
+
+    Flux<Account> findByAccountNumber(int accountNumber);
+
 }

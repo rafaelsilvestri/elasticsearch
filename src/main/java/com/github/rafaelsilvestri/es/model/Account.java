@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 /**
  * Account document model
@@ -12,14 +13,10 @@ import org.springframework.data.elasticsearch.annotations.Field;
  */
 @Document(indexName = "bank", type = "accounts")
 public class Account {
+
     @Id
     private String id;
-
-    @JsonProperty("firstname")
-    @Field("firstname")
     private String firstName;
-    @JsonProperty("lastname")
-    @Field("lastname")
     private String lastName;
     private int age;
     private char gender;
@@ -28,8 +25,6 @@ public class Account {
     private String address;
     private String city;
     private String state;
-    @JsonProperty("account_number")
-    @Field("account_number")
     private int accountNumber;
     private double balance;
 

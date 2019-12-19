@@ -33,7 +33,7 @@ sudo sysctl -w vm.max_map_count=262144
 Create a new index if it doesn't exists and adds a new document with ID 1
 
 ```bash
-curl -XPUT "http://elasticsearch:9200/user/_doc/1" -H 'Content-Type: application/json' -d'
+curl -XPUT "http://localhost:9200/user/_doc/1" -H 'Content-Type: application/json' -d'
 {
   "firstName":"Rafael",
   "lastName":"Silvestri"
@@ -42,7 +42,7 @@ curl -XPUT "http://elasticsearch:9200/user/_doc/1" -H 'Content-Type: application
 
 Retrieve the document 1
 ```bash
-curl -XGET "http://elasticsearch:9200/user/_doc/1"
+curl -XGET "http://localhost:9200/user/_doc/1"
 ```
 
 ## Indexing documents in bulk
